@@ -171,7 +171,7 @@ const App = () => {
 			<Map center={fromLonLat(center)} zoom={zoom}>
 				<Layers>
 					<TileLayer
-						source={bingmaps()}
+						source={osm()}
 						zIndex={0}
 					/>
 					{/* 
