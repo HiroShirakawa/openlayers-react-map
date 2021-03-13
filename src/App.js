@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
 import Map from "./Map";
-import { Layers, TileLayer, VectorLayer } from "./Layers";
+import { Layers, TileLayer, VectorLayer,ImageLayer } from "./Layers";
 import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style';
-import { osm, bingmaps, vector } from "./Source";
+import { osm, bingmaps, vector,imagewms } from "./Source";
 import { fromLonLat, get } from 'ol/proj';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Controls, FullScreenControl } from "./Controls";
@@ -39,126 +39,6 @@ let styles = {
 	}),
 };
 
-const geojsonObject = {
-	"type": "FeatureCollection",
-	"features": [
-		{
-			"type": "Feature",
-			"properties": {
-				"kind": "county",
-				"name": "Wyandotte",
-				"state": "KS"
-			},
-			"geometry": {
-				"type": "MultiPolygon",
-				"coordinates": [
-					[
-						[
-							[
-								-94.8627,
-								39.202
-							],
-							[
-								-94.901,
-								39.202
-							],
-							[
-								-94.9065,
-								38.9884
-							],
-							[
-								-94.8682,
-								39.0596
-							],
-							[
-								-94.6053,
-								39.0432
-							],
-							[
-								-94.6053,
-								39.1144
-							],
-							[
-								-94.5998,
-								39.1582
-							],
-							[
-								-94.7422,
-								39.1691
-							],
-							[
-								-94.7751,
-								39.202
-							],
-							[
-								-94.8627,
-								39.202
-							]
-						]
-					]
-				]
-			}
-		}
-	]
-};
-const geojsonObject2 = {
-	"type": "FeatureCollection",
-	"features": [
-		{
-			"type": "Feature",
-			"properties": {
-				"kind": "county",
-				"name": "Johnson",
-				"state": "KS"
-			},
-			"geometry": {
-				"type": "MultiPolygon",
-				"coordinates": [
-					[
-						[
-							[
-								-94.9065,
-								38.9884
-							],
-							[
-								-95.0544,
-								38.9829
-							],
-							[
-								-95.0544,
-								38.7365
-							],
-							[
-								-94.9668,
-								38.7365
-							],
-							[
-								-94.6108,
-								38.7365
-							],
-							[
-								-94.6108,
-								38.846
-							],
-							[
-								-94.6053,
-								39.0432
-							],
-							[
-								-94.8682,
-								39.0596
-							],
-							[
-								-94.9065,
-								38.9884
-							]
-						]
-					]
-				]
-			}
-		}
-	]
-};
 
 const App = () => {
 	const [center, setCenter] = useState([100.57739,14.35167]);
@@ -173,6 +53,9 @@ const App = () => {
 					<TileLayer
 						source={osm()}
 						zIndex={0}
+					/>
+					<ImageLayer 
+					        source={imagewms()}
 					/>
 					{/* 
 					{showLayer1 && (
